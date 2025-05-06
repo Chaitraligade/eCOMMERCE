@@ -1,0 +1,32 @@
+
+
+<h1>Your Cart</h1>
+
+<% if @cart_items.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |item| %>
+        <tr>
+          <td><%= item[:product].name %></td>
+          <td>$<%= item[:product].price %></td>
+          <td><%= item[:quantity] %></td>
+          <td>
+            <%= button_to "Remove", remove_from_cart_orders_path(product_id: item[:product].id), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Proceed to Checkout", new_order_path, class: "btn btn-success" %>
+<% else %>
+  <p>Your cart is empty.</p>
+  <%= link_to "Shop Products", products_path, class: "btn btn-primary" %>
+<% end %>

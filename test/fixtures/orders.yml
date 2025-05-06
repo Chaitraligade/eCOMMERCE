@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  user_id: 1  # ✅ Ensure this matches a valid user in `users.yml`
+  total_price: 50.0
+  status: "pending"
+
+two:
+  id: 2
+  user_id: 2  # ✅ Ensure this user exists in `users.yml`
+  total_price: 75.0
+  status: "confirmed"

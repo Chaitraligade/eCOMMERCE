@@ -1,0 +1,18 @@
+<h1>Checkout</h1>
+<%= form_with model: @order, url: orders_path, data: { turbo: true } do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :user_name %>
+  </div>
+  <div>
+    <%= f.label :address %>
+    <%= f.text_area :user_address %>
+  </div>
+  <div>
+    <%= f.label :payment_method %>
+    <%= f.select :payment_method, ['Cash on Delivery', 'Credit Card', 'UPI'] %>
+  </div>
+  <div>
+    <%= f.submit 'Place Order' %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+# one:
+#   user_id: 1
+#   cart: one
+#   product: one
+#   user: regular
+#   quantity: 2
+
+# two:
+#   user_id: 2
+#   cart: one
+#   product: two
+#   user: admin
+#   quantity: 1
+
+one:
+  user_id: 3  # ✅ References 'regular' from users.yml
+  product_id: 1   # ✅ References 'one' from products.yml
+  quantity: 2
+
+two:
+  user_id: 2  # ✅ References 'admin' from users.yml
+  product_id: 2 # ✅ References 'two' from products.yml
+  quantity: 1

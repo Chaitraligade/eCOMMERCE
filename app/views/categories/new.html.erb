@@ -1,0 +1,30 @@
+<h1>New Category</h1>
+
+<%= form_with(model: @category, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+   <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Category", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<% if @category.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>There were errors with your submission:</h4>
+    <ul>
+      <% @category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>
+

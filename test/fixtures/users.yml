@@ -1,0 +1,19 @@
+
+one:
+  id: 1
+  name: "John Doe"
+  email: "john@example.com"
+
+admin:
+  id: 2
+  name: Admin User
+  email: admin@example.com
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: true
+
+regular:
+  id: 3
+  name: Regular User
+  email: user@example.com
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: false

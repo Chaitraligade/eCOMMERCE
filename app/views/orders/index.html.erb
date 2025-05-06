@@ -1,0 +1,40 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Total Price</th>
+      <th>Status</th>
+      <th>Payment</th>
+      <th>Order Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td>₹<%= order.total_price %></td>
+        <td><%= order.status %></td>
+        
+        <td>
+        <p>
+  <strong>Payment Status:</strong> 
+  <span class="<%= order.payment_status == 'Paid' ? 'badge-success' : 'badge-danger' %>">
+    <%= order.payment_status %>
+  </span>
+</p>
+
+        <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+
+        <td>
+          <% if current_user.admin? %>
+            <% unless order.paid? %>
+              <%= button_to 'Mark as Paid', mark_paid_order_path(order), method: :patch, class: "btn btn-success btn-sm", data: { confirm: 'Confirm payment?' } %>
+            <% end %>
+            <%= button_to 'Complete Order', update_status_order_path(order, status: 'completed'), method: :patch, class: "btn btn-primary btn-sm", data: { confirm: 'Confirm status update?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

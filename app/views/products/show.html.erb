@@ -1,0 +1,21 @@
+<div>
+<h1><%= @product.name %></h1>
+<p><%= @product.description %></p>
+
+<p>Price: <%= number_to_currency(@product.price, unit: "₹", delimiter: ",", precision: 2) %></p>
+
+<p>Stock: <%= @product.stock %></p>
+        
+
+<% if @product.image.attached? %>
+  <%= image_tag @product.image.variant(resize_to_limit: [300, 300]).processed %>
+<% else %>
+  <p>No image available</p>
+<% end %>
+</div>
+<div>
+  <% if current_user&.admin? %>
+ <%= link_to 'Edit', admin_product_path(@product) %>
+ <% end %>
+  <%= link_to 'Back', products_path %>
+ </div>      

@@ -1,0 +1,21 @@
+<h1 class="mb-4">Categories</h1>
+
+<div class="row">
+  <% @categories.each do |category| %>
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+          <h4 class="card-title"><%= category.name %></h4>
+          <p><%=category.description%></p>
+          <%= link_to 'View Products', products_path(category_id: category.id), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if current_user&.admin? %>
+  <div class="text-center mt-4">
+    <%= link_to "New Category", new_category_path, class: "btn btn-success" %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<!-- app/views/orders/new.html.erb -->
+<h1>New Order</h1>
+<%= form_with(model: @order, url: orders_path) do |f| %>
+  <p><%= f.label :user_name %><br><%= f.text_field :user_name %></p>
+  <p><%= f.label :user_address %><br><%= f.text_field :user_address %></p>
+  <p><%= f.label :payment_method %><br><%= f.select :payment_method, ["COD", "Credit Card"] %></p>
+  <%= f.submit "Create Order" %>
+<% end %>

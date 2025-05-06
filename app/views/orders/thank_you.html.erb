@@ -1,0 +1,17 @@
+<h1>✅ Order Confirmation</h1>
+<p><strong>Order ID:</strong> <%= @order.id %></p>
+<p><strong>Total Price:</strong> <%= @order.total_price %></p>
+<p><strong>Status:</strong> <%= @order.status %></p>
+<p><strong>Payment Method:</strong> <%= @order.payment_method %></p>
+<p><strong>Order Date:</strong> <%= @order.created_at.strftime('%Y-%m-%d') %></p>
+
+<!--<% if @order.paid == false %>
+  <%= form_with(model: @order, url: mark_paid_admin_order_path(@order), method: :patch) do |form| %>
+    <%= form.submit 'Mark as Paid' %>
+  <% end %>
+<% else %>
+  <p>✅ Payment has already been received.</p>
+<% end %>
+-->
+
+<%= link_to 'Back to Orders', orders_path %>

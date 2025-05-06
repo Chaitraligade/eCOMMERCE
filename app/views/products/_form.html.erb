@@ -1,0 +1,32 @@
+<%= form_with model: product, local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+ <div>
+  <%= form.label :price, "Price (₹)" %>
+  <%= form.number_field :price, step: 0.01, placeholder: "Enter amount in ₹" %>
+</div>
+  <div>
+    <%= form.label :stock %>
+    <%= form.number_field :stock %>
+  </div>
+
+  <div>
+    <%= form.label :category_id, "Category" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: "Select a category" %>
+  </div>
+
+  <div>
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+  </div>
+  
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+
+toy_car:
+  name: "Toy Car"
+  user_id: 1  # ✅ Correctly references `users.yml`
+
+one:
+  name: "Toy Car"
+  description: "A small toy car for kids."
+  price: 10.99
+  stock: 15
+  category: 1  # Make sure this category exists in categories.yml
+  user_id: 1  # This must match a user in users.yml
+
+two:
+  name: "Doll"
+  description: "A beautiful doll."
+  price: 15.50
+  stock: 8
+  category: 1
+  user_id: 2
+

@@ -1,0 +1,69 @@
+<h1 class="text-center my-4">🛍️ Products</h1>
+
+<div class="search-bar">
+  <%= form_with(url: products_path, method: :get, local: true, class: "mb-4") do %>
+    <div class="row align-items-center">
+      <div class="col-md-5">
+        <%= label_tag :search, "Search:", class: "form-label" %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search by name or description", class: "form-control" %>
+      </div>
+      <div class="col-md-3">
+        <%= label_tag :category_id, "Category:", class: "form-label" %>
+        <%= select_tag :category_id, options_for_select(@categories.pluck(:name, :id), params[:category_id]), include_blank: "All Categories", class: "form-select" %>
+      </div>
+      <div class="col-md-2">
+        <%= submit_tag "Search", class: "btn btn-primary w-100 mt-4" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if current_user&.admin? %>
+  <div class="text-end mb-3">
+    <%= link_to '➕ Add Product', new_product_path, class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<!-- 🏬 Product Grid Layout with Images -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @products.each do |product| %>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        
+        <% if product.image.attached? %>
+          <%= image_tag url_for(product.image), class: 'card-img-top', alt: product.name %>
+        <% else %>
+          <%= image_tag asset_path('to.jpg'), class: 'card-img-top', alt: 'Default Image' %>
+        <% end %>
+
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-text"><strong> Price:</strong> <%= number_to_currency(product.price) %></p>
+        </div>
+
+        <div class="card-footer text-center">
+          <%= link_to '👁 Show', product_path(product), class: "btn btn-info btn-sm mx-1" %>
+
+          <% if current_user&.admin? %>
+            <%= link_to '✏ Edit', edit_product_path(product), class: "btn btn-warning btn-sm mx-1" %>
+            <%= form_with(model: product, method: :delete, local: true, class: "d-inline") do |f| %>
+              <%= f.submit '🗑 Delete', data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm mx-1' %>
+            <% end %>
+          <% end %>
+
+          <!-- ✅ Corrected Add to Cart Form -->
+          <%= form_with url: add_to_cart_orders_orders_path, method: :post, local: true do |f| %>
+            <%= hidden_field_tag :product_id, product.id %>
+            <%= number_field_tag :quantity, 1, min: 1, class: "form-control d-inline w-50" %>
+            <%= submit_tag "Add to Cart", class: "btn btn-primary btn-sm mt-2" %>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="pagination-container text-center mt-4">
+  <%= paginate @products %>
+</div>
